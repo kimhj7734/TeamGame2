@@ -4,11 +4,11 @@
 #
 [Ll]ibrary/
 [Tt]emp/
-/[Oo]bj/
+[Oo]bj/
 /[Bb]uild/
 /[Bb]uilds/
 [Ll]ogs/
-/[Uu]ser[Ss]ettings/
+[Uu]ser[Ss]ettings/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -72,4 +72,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 /Library/PackageCache
 /firstTopDown/Library/Artifacts/*
-/firstTopDown/Assets/Adaptive Performance*/*
+/firstTopDown/Assets/Adaptive*
