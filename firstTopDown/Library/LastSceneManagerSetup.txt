@@ -1,4 +1,8 @@
 sceneSetups:
+- path: Assets/Scenes/TitleScene.unity
+  isLoaded: 1
+  isActive: 0
+  isSubScene: 0
 - path: Assets/Scenes/MainView.unity
   isLoaded: 1
   isActive: 0
@@ -6,8 +10,4 @@ sceneSetups:
 - path: Assets/Scenes/InGameScene.unity
   isLoaded: 1
   isActive: 1
-  isSubScene: 0
-- path: Assets/Scenes/TitleScene.unity
-  isLoaded: 1
-  isActive: 0
   isSubScene: 0

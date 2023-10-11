@@ -8,8 +8,4 @@ public class commonUIBtn : MonoBehaviour
     void Start() {
         
     }
-
-    void Update() {
-        
-    }
 }

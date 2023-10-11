@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - StartBtn
+  - ViewCamera
+  - TitleCamera
+  - InGameCamera
+  - UIBtn
   layers:
   - Default
   - TransparentFX
