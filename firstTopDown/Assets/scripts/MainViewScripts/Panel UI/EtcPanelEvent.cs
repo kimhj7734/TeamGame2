@@ -7,8 +7,7 @@ public class EtcPanelEvent : MonoBehaviour
     [SerializeField] private GameObject target;
     private bool targetActive = false;
 
-    void Start()
-    {
+    void Start() {
         // 처음엔 비활성화 상태
         target.SetActive(targetActive);
     }

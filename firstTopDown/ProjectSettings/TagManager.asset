@@ -9,6 +9,9 @@ TagManager:
   - TitleCamera
   - InGameCamera
   - UIBtn
+  - commonBtn
+  - popImg
+  - commonPanel
   layers:
   - Default
   - TransparentFX
@@ -45,4 +48,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer 1
+    uniqueID: 2562856499
+    locked: 0
+  - name: New Layer 2
+    uniqueID: 3348220965
     locked: 0

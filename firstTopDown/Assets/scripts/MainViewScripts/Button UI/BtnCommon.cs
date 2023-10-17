@@ -14,6 +14,7 @@ public class BtnCommon : MonoBehaviour
     public float clickDelay = 0.5f; // 클릭 딜레이 시간
     private float lastClickTime = 0f;
 
+    // 메뉴 버튼 클릭 딜레이 설정
     void Update() {
         if (Input.GetMouseButtonDown(0)) {
             // 현재 시간을 기록
@@ -28,4 +29,5 @@ public class BtnCommon : MonoBehaviour
             }
         }
     }
+
 }
