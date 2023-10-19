@@ -16,12 +16,7 @@ public class EtcPanelEvent : MonoBehaviour
     public void TogglePanel() {
         targetActive = !targetActive;
         target.SetActive(targetActive);
-        if (targetActive) {
-            Debug.Log("패널이 활성화되었습니다.");
-        }
-
-        else {
-            Debug.Log("패널이 비활성화되었습니다.");
-        }
+        if (targetActive) {}
+        else {}
     }
 }
