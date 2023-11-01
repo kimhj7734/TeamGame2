@@ -176,9 +176,10 @@ public class BtnCommon : MonoBehaviour
                 
             } else {
                 btnTarget[i].interactable = !btnActive; // 나머지 버튼 상태를 반전
+
             }
         }
-        
+
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -186,11 +187,15 @@ public class BtnCommon : MonoBehaviour
 
     /* optionBtn 빈 곳, 확인 버튼 눌렀을 때, 활성 or 비활성 기능 */
     public void optionExitBtnClick(int btnIndex) {
+
         for (int i = 0; i < optionCloseBtn.Length; i++) {
             if (i == btnIndex) {   // closeBtn or confirmBtn 을 눌렀을 때, btnTarget 모두 활성화.
+
                 for (int a = 0; a < btnTarget.Length; a++) {
                     btnTarget[a].interactable = btnActive;
+
                 }
+
             } 
 
         }
@@ -198,22 +203,32 @@ public class BtnCommon : MonoBehaviour
 
     /* checkBtn 빈 곳, 확인 버튼 눌렀을 때, 활성 or 비활성 기능 */
     public void checkExitBtnClick(int btnIndex) {
+
         for (int i = 0; i < checkCloseBtn.Length; i++) {
+
             if (i == btnIndex) {   // closeBtn or confirmBtn 을 눌렀을 때, btnTarget 모두 활성화.
+
                 for (int a = 0; a < btnTarget.Length; a++) {
                     btnTarget[a].interactable = btnActive;
+
                 }
+
             }
         }
     }
 
     /* missionBtn 빈 곳, 확인 버튼 눌렀을 때, 활성 or 비활성 기능 */
     public void missionExitBtnClick(int btnIndex) {
+
         for (int i = 0; i < missionCloseBtn.Length; i++) {
+
             if (i == btnIndex) {   // closeBtn or confirmBtn 을 눌렀을 때, btnTarget 모두 활성화.
+                
                 for (int a = 0; a < btnTarget.Length; a++) {
                     btnTarget[a].interactable = btnActive;
+
                 }
+
             }
         }
     }
