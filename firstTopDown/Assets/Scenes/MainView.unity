@@ -415,7 +415,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba455be5b7f255c45bf146e296753c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adm: {fileID: 476804187}
+  currentDate: 2023-11-02
+  lastRewardDate: 
 --- !u!1 &37846946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,9 +1491,10 @@ GameObject:
   m_Component:
   - component: {fileID: 322308973}
   - component: {fileID: 322308975}
+  - component: {fileID: 322308976}
   - component: {fileID: 322308974}
   m_Layer: 5
-  m_Name: FreeCoin
+  m_Name: freeCoinText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1537,7 +1539,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBB34\uB8CC\uC5BB\uAE30"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 25608b485c6aaf74ab5f216c4b818afd, type: 2}
   m_sharedMaterial: {fileID: 8742297002007469385, guid: 25608b485c6aaf74ab5f216c4b818afd, type: 2}
@@ -1564,8 +1566,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1614,6 +1616,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 322308972}
   m_CullTransparentMesh: 1
+--- !u!114 &322308976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322308972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba455be5b7f255c45bf146e296753c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDate: 2023-11-02
+  lastRewardDate: 
 --- !u!1 &374537339
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,8 +2121,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000038146973, y: 4.84}
-  m_SizeDelta: {x: 232, y: 300.66}
+  m_AnchoredPosition: {x: -0.000020027, y: 5.18}
+  m_SizeDelta: {x: 233, y: 303.53}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &400473275
 SpriteRenderer:
@@ -3569,8 +3585,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 369.39, y: 541}
-  m_SizeDelta: {x: 160, y: 130.31}
+  m_AnchoredPosition: {x: 369.91, y: 541}
+  m_SizeDelta: {x: 161.04, y: 130.31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &708983727
 MonoBehaviour:
@@ -4570,9 +4586,10 @@ GameObject:
   m_Component:
   - component: {fileID: 891041324}
   - component: {fileID: 891041326}
+  - component: {fileID: 891041327}
   - component: {fileID: 891041325}
   m_Layer: 5
-  m_Name: FreeGem
+  m_Name: freeGemText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4617,7 +4634,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBB34\uB8CC\uC5BB\uAE30"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 25608b485c6aaf74ab5f216c4b818afd, type: 2}
   m_sharedMaterial: {fileID: 8742297002007469385, guid: 25608b485c6aaf74ab5f216c4b818afd, type: 2}
@@ -4644,8 +4661,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4694,6 +4711,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 891041323}
   m_CullTransparentMesh: 1
+--- !u!114 &891041327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891041323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba455be5b7f255c45bf146e296753c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDate: 2023-11-02
+  lastRewardDate: 
 --- !u!1 &918147595
 GameObject:
   m_ObjectHideFlags: 0
@@ -5751,6 +5782,7 @@ GameObject:
   - component: {fileID: 1171435570}
   - component: {fileID: 1171435569}
   - component: {fileID: 1171435568}
+  - component: {fileID: 1171435571}
   m_Layer: 5
   m_Name: FreeGemBtn
   m_TagString: Untagged
@@ -5821,7 +5853,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1171435569}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1171435571}
+        m_TargetAssemblyTypeName: GoodsManager, Assembly-CSharp
+        m_MethodName: FreeGetGem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1171435569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5860,6 +5904,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171435566}
   m_CullTransparentMesh: 1
+--- !u!114 &1171435571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171435566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba455be5b7f255c45bf146e296753c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDate: 2023-11-02
+  lastRewardDate: 
 --- !u!1 &1260179973
 GameObject:
   m_ObjectHideFlags: 0
@@ -6361,7 +6419,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba455be5b7f255c45bf146e296753c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adm: {fileID: 1823856401}
+  currentDate: 2023-11-02
+  lastRewardDate: 
 --- !u!1 &1314826309
 GameObject:
   m_ObjectHideFlags: 0
@@ -7794,6 +7853,7 @@ GameObject:
   - component: {fileID: 1673694520}
   - component: {fileID: 1673694519}
   - component: {fileID: 1673694518}
+  - component: {fileID: 1673694521}
   m_Layer: 5
   m_Name: FreeCoinBtn
   m_TagString: Untagged
@@ -7864,7 +7924,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1673694519}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1673694521}
+        m_TargetAssemblyTypeName: GoodsManager, Assembly-CSharp
+        m_MethodName: FreeGetCoin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1673694519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7903,6 +7975,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1673694516}
   m_CullTransparentMesh: 1
+--- !u!114 &1673694521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673694516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba455be5b7f255c45bf146e296753c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDate: 2023-11-02
+  lastRewardDate: 
 --- !u!1 &1703656077
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,6 @@ using TMPro;
 
 public class GoodsManager : MonoBehaviour
 {
-    // 광고 보상(재화) 변수를 사용하기 위한 클래스 참조
-    public GoogleAdMob adm;
-
     // 코인 , 다이아 를 담을 변수
     public static int coinInt;
     public static int gemInt;
@@ -17,15 +15,19 @@ public class GoodsManager : MonoBehaviour
     public static TMP_Text coinText;
     public static TMP_Text gemText;
 
-    void Awake() {
-        // coinBtn 에 구글애드몹 스크립트가 있음.
-        // adm = GameObject.Find("BtnCanvas").transform.Find("ShopBtn").transform.Find("ShopCanvas").transform.Find("ShopIMG").transform.Find("CoinBtn")
-        // .GetComponentInChildren<GoogleAdMob>();
-        adm = FindObjectOfType<GoogleAdMob>();
-        if (adm == null) {
-            Debug.Log("not found");
-        }
-    }
+    // 무료 재화를 표시할 텍스트
+    public static TMP_Text freeCoinText;
+    public static TMP_Text freeGemText;
+
+    // 일일제한 코인, 보석 변수
+    public static int countCoin = 0;
+    public static int countGem = 0;
+
+    // 현재 날짜 저장하기 위한 변수 (현재시간은 제외)
+    public static DateTime dtNow = DateTime.Now;
+    public String currentDate = dtNow.ToString("yyyy-MM-dd");
+    public string lastRewardDate;
+
 
     void Start() {
         /*
@@ -42,27 +44,53 @@ public class GoodsManager : MonoBehaviour
             Debug.Log("gemText not found !");
         }
 
+        /*
+            freeCoinText 는 BtnCanvas/ShopBtn/ShopCanvas/ShopIMG 에 있는 자식 컴포넌트인 freeCoinText 입니다.
+            freeGemText  는 BtnCanvas/ShopBtn/ShopCanvas/ShopIMG 에 있는 자식 컴포넌트인 freeGemText  입니다.
+        */
+        freeCoinText = GameObject.Find("BtnCanvas").transform.Find("ShopBtn").transform.Find("ShopCanvas").transform.Find("ShopIMG")
+        .transform.Find("FreeCoinBtn").GetComponentInChildren<TMP_Text>();
+        if (freeCoinText == null) {
+            Debug.Log("coinText not found !");
+        }
+
+        freeGemText = GameObject.Find("BtnCanvas").transform.Find("ShopBtn").transform.Find("ShopCanvas").transform.Find("ShopIMG")
+        .transform.Find("FreeGemBtn").GetComponentInChildren<TMP_Text>();
+        if (freeGemText == null) {
+            Debug.Log("coinText not found !");
+        }
+        /******************************************** 컴포넌트 / 오브젝트 참조 경로 End *****************************************************************/
+
         // PlayerPrefs 내에 저장되어있는 'Coin'을 불러옵니다. 만약에 저장된 정보가 없다면 0을 저장합니다.
         coinInt = PlayerPrefs.GetInt("Coin", 0);
         gemInt = PlayerPrefs.GetInt("Gem", 0);
-        PlayerPrefs.Save();
 
-        // Message.SetActive(false);
+        // 현재 시간을 제외하고 날짜만 저장
+        PlayerPrefs.GetString("SavedDate", currentDate);
+
+        PlayerPrefs.Save();
     }
     
     void Update() {
-        // coinInt , gemInt 를 PlayerPrefs 내에 저장되어있는 'Coin' , 'Gem'에 저장합니다.
+        // coinInt , gemInt , currentDate 를 PlayerPrefs 내에 저장되어있는 'Coin' , 'Gem' , 'SavedDate' 에 저장합니다.
         PlayerPrefs.SetInt("Coin", coinInt);
         PlayerPrefs.SetInt("Gem", gemInt);
+        PlayerPrefs.SetString("SavedDate", currentDate);
 
 
-        // CoinText의 Text에 CoinInt를 출력합니다.
+        /*
+            CoinText의 Text에 CoinInt , GemText 의 Text에 GemInt 표시
+            일일제한 코인,보석을 표시
+        */
         coinText.text = coinInt.ToString();
         gemText.text = gemInt.ToString();
 
+        freeCoinText.text = "무료코인 : " + countCoin + " / 5";
+        freeGemText.text = "무료보석 : " + countGem + " / 5";
+
     }
 
-    // 코인 얻는 함수
+    // 광고보상형 코인 얻는 함수
     public double GetCoin(double rewardCoin) {
         rewardCoin += PlayerPrefs.GetInt("Coin", 0);
         coinInt = (int)rewardCoin;
@@ -71,13 +99,78 @@ public class GoodsManager : MonoBehaviour
         return coinInt;
     }
 
-    // 보석 얻는 함수
+    // 광고보상형 보석 얻는 함수
     public double GetGem(double rewardGem) {
         rewardGem += PlayerPrefs.GetInt("Gem", 0); ;
         gemInt = (int)rewardGem;
         Debug.Log("보석 얻었다");
 
         return gemInt;
+    }
+
+    // 무료보상 코인, 하루 5번까지
+    public void FreeGetCoin() {
+        // 이전 보상을 받은 날짜를 PlayerPrefs에서 가져옴 (시간제외)
+        string lastRewardDate = PlayerPrefs.GetString("LastRewardDate", "").ToString();
+        // 현재 날짜를 문자열로 저장 (시간제외)
+        string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+        
+        // 보상 코인
+        int freeCoin = 10;
+        
+        // 여기서 날짜비교 조건문 , 날짜중 일자가 현재일자와 같지않으면 밑의 IF문 안탐.
+        if (lastRewardDate == currentDate) {
+            if (countCoin < 5) {
+                countCoin++;
+                coinInt += freeCoin;
+                PlayerPrefs.SetInt("Coin", coinInt);
+
+                // 현재 날짜를 LastRewardDate로 저장
+                PlayerPrefs.SetString("LastRewardDate", currentDate);
+                PlayerPrefs.Save();
+            }
+            
+            else {
+                Debug.Log("일일 제한을 초과하셨습니다.");
+            }
+        } 
+        
+        else {
+            Debug.Log("다음에 오셔서 보상 받으세요 ㅋㅋ");
+        }
+
+    }
+
+    // 무료보상 보석, 하루 5번까지
+    public void FreeGetGem() {
+        // 이전 보상을 받은 날짜를 PlayerPrefs에서 가져옴 (시간제외)
+        string lastRewardDate = PlayerPrefs.GetString("LastRewardDate", "").ToString();
+        // 현재 날짜를 문자열로 저장 (시간제외)
+        string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+
+        // 무료 보상 보석
+        int freeGem = 3;
+
+        if (lastRewardDate == currentDate) {
+            if (countGem < 5) {
+                countGem++;
+                gemInt += freeGem;
+                PlayerPrefs.SetInt("Gem", gemInt);
+
+                // 현재 날짜를 LastRewardDate로 저장
+                PlayerPrefs.SetString("LastRewardDate", currentDate);
+                PlayerPrefs.Save();
+            }
+            
+            else {
+                Debug.Log("일일 제한을 초과하셨습니다.");
+            }
+        }
+
+        else {
+            Debug.Log("다음에 오셔서 보상 받으세요 ㅋㅋ");
+        }
+        
     }
 
     // // 코인 잃는 함수

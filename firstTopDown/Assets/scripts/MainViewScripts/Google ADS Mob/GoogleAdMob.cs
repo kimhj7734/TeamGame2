@@ -150,7 +150,7 @@ public class GoogleAdMob : MonoBehaviour
         const string rewardMsg =
             "Rewarded ad rewarded the user. Type: {0}, amount: {1}, amount: {1}";
 
-        // 여기에서 광고 보상이 지급됨.
+        // 여기에서 광고 보상이 지급됨. 추후에 광고제거를 샀을 경우 여기에서 조건문
         if (rewardedAd != null && rewardedAd.CanShowAd()) {
             rewardedAd.Show((Reward reward) => {
                 // TODO: Reward the user.
