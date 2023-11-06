@@ -25,7 +25,7 @@ public class GoodsManager : MonoBehaviour
 
     // 현재 날짜 저장하기 위한 변수 (현재시간은 제외)
     public static DateTime dtNow = DateTime.Now;
-    public String currentDate = dtNow.ToString("yyyy-MM-dd");
+    public string currentDate = dtNow.ToString("yyyy-MM-dd");
     public string lastRewardDate;
 
 
@@ -68,6 +68,9 @@ public class GoodsManager : MonoBehaviour
         // 현재 시간을 제외하고 날짜만 저장
         PlayerPrefs.GetString("SavedDate", currentDate);
 
+        // 현재까지 저장된 데이터 모두 삭제 (테스트용)
+        // PlayerPrefs.DeleteAll();
+
         PlayerPrefs.Save();
     }
     
@@ -76,7 +79,6 @@ public class GoodsManager : MonoBehaviour
         PlayerPrefs.SetInt("Coin", coinInt);
         PlayerPrefs.SetInt("Gem", gemInt);
         PlayerPrefs.SetString("SavedDate", currentDate);
-
 
         /*
             CoinText의 Text에 CoinInt , GemText 의 Text에 GemInt 표시
@@ -117,28 +119,27 @@ public class GoodsManager : MonoBehaviour
         
         // 보상 코인
         int freeCoin = 10;
-        
-        // 여기서 날짜비교 조건문 , 날짜중 일자가 현재일자와 같지않으면 밑의 IF문 안탐.
-        if (lastRewardDate == currentDate) {
-            if (countCoin < 5) {
-                countCoin++;
-                coinInt += freeCoin;
-                PlayerPrefs.SetInt("Coin", coinInt);
 
-                // 현재 날짜를 LastRewardDate로 저장
-                PlayerPrefs.SetString("LastRewardDate", currentDate);
-                PlayerPrefs.Save();
-            }
-            
-            else {
-                Debug.Log("일일 제한을 초과하셨습니다.");
-            }
-        } 
-        
-        else {
-            Debug.Log("다음에 오셔서 보상 받으세요 ㅋㅋ");
+        // 여기서 날짜 비교 조건문, 날짜 중 일자가 현재 일자와 같지 않으면 아래의 IF문 안탐.
+        if (lastRewardDate != currentDate) {
+            countCoin = 0; // 날짜가 바뀌었으므로 리셋
+
+            // 현재 날짜를 LastRewardDate로 저장
+            PlayerPrefs.SetString("LastRewardDate", currentDate);
+            PlayerPrefs.Save();
         }
 
+        if (countCoin < 5) {
+            countCoin++;
+            coinInt += freeCoin;
+            PlayerPrefs.SetInt("Coin", coinInt);
+            PlayerPrefs.Save();
+        }
+        
+        else {
+            Debug.Log("일일 제한을 초과하셨습니다.");
+        }
+    
     }
 
     // 무료보상 보석, 하루 5번까지
@@ -151,24 +152,24 @@ public class GoodsManager : MonoBehaviour
         // 무료 보상 보석
         int freeGem = 3;
 
-        if (lastRewardDate == currentDate) {
-            if (countGem < 5) {
-                countGem++;
-                gemInt += freeGem;
-                PlayerPrefs.SetInt("Gem", gemInt);
+        // 여기서 날짜 비교 조건문, 날짜 중 일자가 현재 일자와 같지 않으면 아래의 IF문 안탐.
+        if (lastRewardDate != currentDate) {
+            countGem = 0; // 날짜가 바뀌었으므로 리셋
 
-                // 현재 날짜를 LastRewardDate로 저장
-                PlayerPrefs.SetString("LastRewardDate", currentDate);
-                PlayerPrefs.Save();
-            }
-            
-            else {
-                Debug.Log("일일 제한을 초과하셨습니다.");
-            }
+            // 현재 날짜를 LastRewardDate로 저장
+            PlayerPrefs.SetString("LastRewardDate", currentDate);
+            PlayerPrefs.Save();
+        }
+
+        if (countGem < 5) {
+            countGem++;
+            gemInt += freeGem;
+            PlayerPrefs.SetInt("Coin", coinInt);
+            PlayerPrefs.Save();
         }
 
         else {
-            Debug.Log("다음에 오셔서 보상 받으세요 ㅋㅋ");
+            Debug.Log("일일 제한을 초과하셨습니다.");
         }
         
     }
