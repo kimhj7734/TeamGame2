@@ -12,6 +12,7 @@ TagManager:
   - commonBtn
   - popImg
   - commonPanel
+  - CharacterCollider
   layers:
   - Default
   - TransparentFX
