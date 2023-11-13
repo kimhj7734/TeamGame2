@@ -275,7 +275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &435602610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,7 +375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &544933820
 Transform:
   m_ObjectHideFlags: 0
@@ -449,7 +449,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 63b94813a7bcb224b83faa98ef1c6cec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b1dd4e8cd0a7dd54da0844ebb94ae733, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -825,7 +825,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: VAMP SURVIVOR
+  m_text: PLANET IO
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 25608b485c6aaf74ab5f216c4b818afd, type: 2}
   m_sharedMaterial: {fileID: 8742297002007469385, guid: 25608b485c6aaf74ab5f216c4b818afd, type: 2}
@@ -920,7 +920,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &1928865424
 AudioListener:
   m_ObjectHideFlags: 0

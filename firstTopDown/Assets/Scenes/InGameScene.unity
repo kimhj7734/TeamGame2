@@ -1435,6 +1435,10 @@ PrefabInstance:
       value: asteroid_gold_13
       objectReference: {fileID: 0}
     - target: {fileID: 4226045945859614327, guid: b51e55ad5fc51a64ba92c6d47462713d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4226045945859614327, guid: b51e55ad5fc51a64ba92c6d47462713d, type: 3}
       propertyPath: m_TagString
       value: CharacterCollider
       objectReference: {fileID: 0}
@@ -2074,6 +2078,10 @@ PrefabInstance:
       value: asteroid_gold_24
       objectReference: {fileID: 0}
     - target: {fileID: 7037968713695868138, guid: 145abf8f9af375c46bc975e74ca7e105, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7037968713695868138, guid: 145abf8f9af375c46bc975e74ca7e105, type: 3}
       propertyPath: m_TagString
       value: CharacterCollider
       objectReference: {fileID: 0}
@@ -2149,6 +2157,10 @@ PrefabInstance:
     - target: {fileID: 56115089659934483, guid: e8848bc5f06c5cf49be67b3b4cc12a61, type: 3}
       propertyPath: m_Name
       value: asteroid_gold_8
+      objectReference: {fileID: 0}
+    - target: {fileID: 56115089659934483, guid: e8848bc5f06c5cf49be67b3b4cc12a61, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 56115089659934483, guid: e8848bc5f06c5cf49be67b3b4cc12a61, type: 3}
       propertyPath: m_TagString
@@ -2503,6 +2515,10 @@ PrefabInstance:
       value: asteroid_1
       objectReference: {fileID: 0}
     - target: {fileID: 707516410289458014, guid: 3618110333d054e40be1d2d32be2655e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 707516410289458014, guid: 3618110333d054e40be1d2d32be2655e, type: 3}
       propertyPath: m_TagString
       value: CharacterCollider
       objectReference: {fileID: 0}
@@ -2638,6 +2654,10 @@ PrefabInstance:
     - target: {fileID: 3965517945357888986, guid: d7fc8f1fd84c464489d427e20b58d972, type: 3}
       propertyPath: m_Name
       value: asteroid_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965517945357888986, guid: d7fc8f1fd84c464489d427e20b58d972, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3965517945357888986, guid: d7fc8f1fd84c464489d427e20b58d972, type: 3}
       propertyPath: m_TagString
@@ -3226,6 +3246,10 @@ PrefabInstance:
       value: asteroid_0
       objectReference: {fileID: 0}
     - target: {fileID: 5691455167270074955, guid: 09da99ef64a7bac439c1f7c7b531d4e2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5691455167270074955, guid: 09da99ef64a7bac439c1f7c7b531d4e2, type: 3}
       propertyPath: m_TagString
       value: CharacterCollider
       objectReference: {fileID: 0}
@@ -3515,6 +3539,10 @@ PrefabInstance:
     - target: {fileID: 8642836441899622975, guid: 9e2737ee8b931754ea02d86224e503f0, type: 3}
       propertyPath: m_Name
       value: asteroid_gold_19
+      objectReference: {fileID: 0}
+    - target: {fileID: 8642836441899622975, guid: 9e2737ee8b931754ea02d86224e503f0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8642836441899622975, guid: 9e2737ee8b931754ea02d86224e503f0, type: 3}
       propertyPath: m_TagString
