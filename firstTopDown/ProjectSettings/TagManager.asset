@@ -5,14 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - StartBtn
-  - ViewCamera
-  - TitleCamera
-  - InGameCamera
   - UIBtn
   - commonBtn
   - popImg
   - commonPanel
   - CharacterCollider
+  - PlayerCharacter
   layers:
   - Default
   - TransparentFX

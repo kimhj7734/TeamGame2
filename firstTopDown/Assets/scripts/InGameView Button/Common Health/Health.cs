@@ -14,7 +14,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (gameObject.CompareTag("Player")) // 플레이어인 경우만 체력 감소 적용
+        if (gameObject.CompareTag("PlayerCharacter")) // 플레이어인 경우만 체력 감소 적용
         {
             currentHealth -= damage;
             if (currentHealth <= 0)

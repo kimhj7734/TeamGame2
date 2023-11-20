@@ -5,7 +5,7 @@ using UnityEngine;
 public class RandomPrefabSpawner : MonoBehaviour
 {
     public GameObject[] prefabList;
-    public int numberOfPrefabsToSpawn = 100; // 생성할 프리팹의 수
+    public int numberOfPrefabsToSpawn = 10; // 생성할 프리팹의 수 100
     public float spawnRadius = 2.0f; // 생성 반경
     public float spawnInterval = 1.0f; // 생성 간격 (초)
 
@@ -16,11 +16,11 @@ public class RandomPrefabSpawner : MonoBehaviour
     private bool canSpawn = true;
 
     public int damageAmount = 10;
-
     
     void Start()
     {
         lastSpawnTime = Time.time; // 시작 시간 초기화
+        
     }
 
     void Update()
@@ -34,25 +34,48 @@ public class RandomPrefabSpawner : MonoBehaviour
 
     void SpawnPrefab()
     {
+        /* 좌표값 */
         Vector2 randomCircle = Random.insideUnitCircle.normalized * spawnRadius;
         float randomY = Random.Range(-2.5f, 2.5f); // 여기서 minY와 maxY는 y 좌표의 범위
         float randomX = Random.Range(-2, 2); // 여기서 minZ와 maxZ는 z 좌표의 범위
         Vector3 spawnPosition = transform.position + new Vector3(randomX * spawnRadius, randomY * spawnRadius, 0);
-        int randomIndex = Random.Range(0, prefabList.Length);
-        // Debug.Log("Spawn Position: " + spawnPosition);
-        // Debug.Log("Random Index: " + randomIndex);
-        Instantiate(prefabList[randomIndex], spawnPosition, Quaternion.identity);
         
-        if (canSpawn)
-        {
-        canSpawn = false;
-        // 프리팹 생성
-        GameObject newPrefab = Instantiate(prefabList[randomIndex], spawnPosition, Quaternion.identity);
-        StartCoroutine(MovePrefabToZero(newPrefab.transform));
-        spawnedCount++;
+        /* 난수 생성 */
+        // int randomIndex = Random.Range(0, prefabList.Length);
+        
+
+        /* 프리팹 생성 */
+        if (canSpawn) {
+            
+            for (int randomIndex = Random.Range(0, prefabList.Length); randomIndex < prefabList.Length; randomIndex++) {
+                // 프리팹 생성
+                GameObject newPrefab = Instantiate(prefabList[randomIndex], spawnPosition, Quaternion.identity);
+                StartCoroutine(MovePrefabToZero(newPrefab.transform));
+                spawnedCount++;
+                
+                // 이미 모든 프리팹을 생성했으면 종료
+                if (spawnedCount >= numberOfPrefabsToSpawn) {
+                    // canSpawn 상태 업데이트
+                    canSpawn = false;
+                    
+                    GameObject prefabsList = GameObject.Find("prefabsList").GetComponent<GameObject>();
+                    Debug.Log(prefabsList);
+
+                    return;
+                }
+            }
         }
 
-        spawnedCount++;
+        // if (canSpawn)
+        // {
+        //     canSpawn = false;
+        //     // 프리팹 생성
+        //     // GameObject newPrefab = Instantiate(prefabList[randomIndex], spawnPosition, Quaternion.identity);
+        //     StartCoroutine(MovePrefabToZero(newPrefab.transform));
+        //     spawnedCount++;
+        // }
+
+        // spawnedCount++;
     }
     void OnTriggerEnter2D(Collider2D other)
     {

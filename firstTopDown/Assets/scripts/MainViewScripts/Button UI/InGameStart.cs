@@ -8,7 +8,6 @@ public class InGameStart : MonoBehaviour
 {
     public void InGameStartBtn() {
         // 씬 전환
-        Debug.Log("Scene Switching !");
         SceneManager.LoadScene("InGameScene");
     }
 }
