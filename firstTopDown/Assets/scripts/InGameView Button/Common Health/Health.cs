@@ -7,21 +7,24 @@ public class Health : MonoBehaviour
     public int maxHealth = 1;
     private int currentHealth;
 
+    public int damage;
+
     void Start()
     {
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage()
     {
-        if (gameObject.CompareTag("PlayerCharacter")) // 플레이어인 경우만 체력 감소 적용
-        {
             currentHealth -= damage;
             if (currentHealth <= 0)
             {
+                Debug.Log("들어오는 데미지량 : " + damage);
                 Die();
+            } else 
+            {
+                Destroy(GameObject.FindGameObjectWithTag("PlayerCharacter"));
             }
-        }
     } 
 
     void Die()

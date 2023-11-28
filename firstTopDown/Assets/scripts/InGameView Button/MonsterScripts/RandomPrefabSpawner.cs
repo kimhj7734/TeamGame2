@@ -14,8 +14,6 @@ public class RandomPrefabSpawner : MonoBehaviour
     private float lastSpawnTime = 0;
 
     private bool canSpawn = true;
-
-    public int damageAmount = 10;
     
     void Start()
     {
@@ -36,8 +34,8 @@ public class RandomPrefabSpawner : MonoBehaviour
     {
         /* 좌표값 */
         Vector2 randomCircle = Random.insideUnitCircle.normalized * spawnRadius;
-        float randomY = Random.Range(-2.5f, 2.5f); // 여기서 minY와 maxY는 y 좌표의 범위
-        float randomX = Random.Range(-2, 2); // 여기서 minZ와 maxZ는 z 좌표의 범위
+        float randomY = Random.Range(-3.5f, 3.5f); // 여기서 minY와 maxY는 y 좌표의 범위
+        float randomX = Random.Range(-3, 3); // 여기서 minZ와 maxZ는 z 좌표의 범위
         Vector3 spawnPosition = transform.position + new Vector3(randomX * spawnRadius, randomY * spawnRadius, 0);
         
         /* 난수 생성 */
@@ -79,27 +77,10 @@ public class RandomPrefabSpawner : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("CharacterCollider"))
-        {
-            // 정중앙 캐릭터와 충돌한 경우
-            // 데미지를 입히고 정중앙 플레이어를 파괴하지 않음
-            Health health = other.GetComponent<Health>();
-            if (health != null)
-            {
-                health.TakeDamage(damageAmount);
-            }
-        }
-        else if (other.CompareTag("Prefab"))
-        {
-            // 프리팹과 충돌한 경우
-            // 데미지를 입히고 프리팹을 제거
-            Health prefabHealth = other.GetComponent<Health>();
-            if (prefabHealth != null)
-            {
-                prefabHealth.TakeDamage(damageAmount);
-            }
-            Destroy(other.gameObject);
-        }
+        Debug.Log("Trigger entered!");
+        Debug.Log("Collided with object tagged: " + other.tag);
+        Health prefabHealth = other.GetComponent<Health>();
+        prefabHealth.TakeDamage();
     }
 
         // 프리팹을 목표 위치로 천천히 이동시키는 코루틴
