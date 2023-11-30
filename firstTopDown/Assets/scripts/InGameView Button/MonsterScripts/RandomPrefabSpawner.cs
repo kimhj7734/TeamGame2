@@ -75,12 +75,18 @@ public class RandomPrefabSpawner : MonoBehaviour
 
         // spawnedCount++;
     }
-    void OnTriggerEnter2D(Collider2D other)
-    {
+    void OnTriggerEnter2D(Collider2D other) {
         Debug.Log("Trigger entered!");
         Debug.Log("Collided with object tagged: " + other.tag);
+
+        // Health 컴포넌트가 있는지 확인
         Health prefabHealth = other.GetComponent<Health>();
-        prefabHealth.TakeDamage();
+        if (prefabHealth != null) {
+            prefabHealth.TakeDamage();
+        }
+        else {
+            Debug.LogWarning("Health component not found on collided object.");
+        }
     }
 
         // 프리팹을 목표 위치로 천천히 이동시키는 코루틴

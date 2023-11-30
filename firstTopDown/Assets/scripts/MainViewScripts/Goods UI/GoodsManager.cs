@@ -13,7 +13,6 @@ public class GoodsManager : MonoBehaviour
     private static Button buyAtkSpdBtn;
     private static Button buyCriticalBtn;
 
-
     private static bool targetActive = true;
 
     // 코인 , 다이아 를 담을 변수
@@ -25,6 +24,12 @@ public class GoodsManager : MonoBehaviour
     public static int buyHealthCoinInt;
     public static int buyAtkSpdCoinInt;
     public static int buyCriticalCoinInt;
+
+    // 스탯 구매시 필요코인 처음 시작 시, 2원부터.
+    public static int buy2AtkCoinInt = 2;
+    public static int buy2HealthCoinInt = 2;
+    public static int buy2AtkSpdCoinInt = 2;
+    public static int buy2CriticalCoinInt = 2;
 
     public static int buyGemInt;
 
@@ -169,12 +174,6 @@ public class GoodsManager : MonoBehaviour
         gemInt = PlayerPrefs.GetInt("Gem", 0);
 
         // 스탯 별 소비코인,보석
-        buyAtkCoinInt = PlayerPrefs.GetInt("buyAtkCoin", 0);
-        buyHealthCoinInt = PlayerPrefs.GetInt("buyHealthCoin", 0);
-        buyAtkSpdCoinInt = PlayerPrefs.GetInt("buyAtkSpdCoin", 0);
-        buyCriticalCoinInt = PlayerPrefs.GetInt("buyCriticalCoin", 0);
-
-
         buyGemInt = PlayerPrefs.GetInt("buyGem", 0);
 
         // 현재 시간을 제외하고 날짜만 저장
@@ -206,12 +205,6 @@ public class GoodsManager : MonoBehaviour
 
         freeCoinText.text = "무료코인 : " + countCoin + " / 5";
         freeGemText.text = "무료보석 : " + countGem + " / 5";
-
-        buyAtkCoinText.text = PlayerPrefs.GetInt("buyAtkCoin", buyAtkCoinInt).ToString() + " 원";
-        buyHealthCoinText.text = PlayerPrefs.GetInt("buyHealthCoin", buyHealthCoinInt).ToString() + " 원";
-        buyAtkSpdCoinText.text = PlayerPrefs.GetInt("buyAtkSpdCoin", buyAtkSpdCoinInt).ToString() + " 원";
-        buyCriticalCoinText.text = PlayerPrefs.GetInt("buyCriticalCoin", buyCriticalCoinInt).ToString() + " 원";
-
     }
 
     // 광고보상형 코인 얻는 함수
@@ -300,112 +293,166 @@ public class GoodsManager : MonoBehaviour
     // 공격 스탯 구매 시,코인 잃는 함수
     public static int LostAtkCoin(int buyAtkCoinInt) {
         PlayerPrefs.GetInt("Coin", coinInt);
-        if (coinInt >= buyAtkCoinInt) {
+        // 처음 2원일 때, 계산
+        if(coinInt >= buyAtkCoinInt && buy2AtkCoinInt == 2) {
             coinInt -= buyAtkCoinInt;
             
-            Debug.Log("돈 잃었다..");
-
-            PlayerPrefs.SetInt("buyAtkCoin", buyAtkCoinInt);
+            // 여기서 처음 2원 계산하고, 이후부터는 2배증가
+            buyAtkCoinInt *= 2;
+            buy2AtkCoinInt = buyAtkCoinInt;
+            buyAtkCoinText.text = buy2AtkCoinInt.ToString() + " 원";
 
             PlayerPrefs.SetInt("Coin", coinInt);
-            PlayerPrefs.Save();
+            PlayerPrefs.SetInt("buy2AtkCoin", buy2AtkCoinInt);
+            PlayerPrefs.SetInt("buyAtkCoin", buyAtkCoinInt);
 
-            return coinInt;
+            PlayerPrefs.Save();
+            return buy2AtkCoinInt;  // 2배 증가된 값을 리턴            
         }
 
-        // 필요코인 부족할 때,
-        else if(coinInt < buyAtkCoinInt) {
-            buyAtkBtn.interactable = !targetActive;    // false
-            return coinInt;
-        } 
-        
-        else {  // 필요코인 충분할 때(재구매 가능)
-            buyAtkBtn.interactable = targetActive;     // true
-            return coinInt;
+        // 2원 이상 일 경우, 2배로 계산
+        else if (coinInt >= buyAtkCoinInt && buy2AtkCoinInt > 2) {
+            coinInt -= buyAtkCoinInt;   // 이전에 2배증가된 값 먼저 빼고, 이후 다시 2배증가
+
+            buy2AtkCoinInt *= 2;
+            buyAtkCoinInt = buy2AtkCoinInt;
+            buyAtkCoinText.text = buyAtkCoinInt.ToString() + " 원";
+
+            PlayerPrefs.SetInt("Coin", coinInt);
+            PlayerPrefs.SetInt("buy2AtkCoin", buy2AtkCoinInt);  // 2배 증가한 값 저장            
+            PlayerPrefs.SetInt("buyAtkCoin", buyAtkCoinInt);    // statManager에서 넘어온 값 저장
+
+            PlayerPrefs.Save();
+            return buyAtkCoinInt;  // 게산 후 값을 리턴
+        }
+
+        // 필요코인 부족할 때 / 돈 부족할때
+        else {
+            return 0;
         }
     }
 
     // 체력 스탯 구매 시, 잃는코인 함수
     public static int LostHealthCoin(int buyHealthCoinInt) {
         PlayerPrefs.GetInt("Coin", coinInt);
-        if (coinInt >= buyHealthCoinInt) {
+        // 처음 2원 계산
+        if (coinInt >= buyHealthCoinInt && buy2HealthCoinInt == 2) {
             coinInt -= buyHealthCoinInt;
 
-            Debug.Log("돈 잃었다..");
-
-            PlayerPrefs.SetInt("buyHealthCoin", buyHealthCoinInt);
+            // 여기서 처음 2원 계산하고, 이후부터는 2배증가
+            buyHealthCoinInt *= 2;
+            buy2HealthCoinInt = buyHealthCoinInt;
+            buyHealthCoinText.text = buy2HealthCoinInt.ToString() + " 원";
 
             PlayerPrefs.SetInt("Coin", coinInt);
-            PlayerPrefs.Save();
+            PlayerPrefs.SetInt("buy2HealthCoin", buy2HealthCoinInt);
+            PlayerPrefs.SetInt("buyHealthCoin", buyHealthCoinInt);
 
-            return coinInt;
+            PlayerPrefs.Save();
+            return buy2HealthCoinInt;  // 2배 증가된 값을 리턴 
+        }
+
+        // 2원 이상 일 경우, 2배로 계산
+        else if(coinInt >= buyHealthCoinInt && buy2HealthCoinInt > 2) {
+            coinInt -= buyHealthCoinInt;
+
+            buy2HealthCoinInt *= 2;
+            buyHealthCoinInt = buy2HealthCoinInt;
+            buyHealthCoinText.text = buyHealthCoinInt.ToString() + " 원";
+
+            PlayerPrefs.SetInt("Coin", coinInt);
+            PlayerPrefs.SetInt("buy2HealthCoin", buy2HealthCoinInt);
+            PlayerPrefs.SetInt("buyHealthCoin", buyHealthCoinInt);
+
+            PlayerPrefs.Save();
+            return buyHealthCoinInt;
         }
 
         // 필요코인 부족할 때,
-        else if (coinInt < buyHealthCoinInt) {
-            buyHealthBtn.interactable = !targetActive;    // false
-            return coinInt;
-        }
-
-        else {  // 필요코인 충분할 때(재구매 가능)
-            buyHealthBtn.interactable = targetActive;     // true
-            return coinInt;
+        else {
+            return 0;
         }
     }
 
     // 공속 스탯 구매 시, 잃는코인 함수
     public static int LostAtkSpdCoin(int buyAtkSpdCoinInt) {
         PlayerPrefs.GetInt("Coin", coinInt);
-        if (coinInt >= buyAtkSpdCoinInt) {
+        // 처음 2원 계산
+        if (coinInt >= buyAtkSpdCoinInt && buy2AtkSpdCoinInt == 2) {
             coinInt -= buyAtkSpdCoinInt;
 
-            Debug.Log("돈 잃었다..");
-
-            PlayerPrefs.SetInt("buyAtkSpdCoin", buyAtkSpdCoinInt);
+            // 여기서 처음 2원 계산하고, 이후부터는 2배증가
+            buyAtkSpdCoinInt *= 2;
+            buy2AtkSpdCoinInt = buyAtkSpdCoinInt;
+            buyAtkSpdCoinText.text = buy2AtkSpdCoinInt.ToString() + " 원";
 
             PlayerPrefs.SetInt("Coin", coinInt);
-            PlayerPrefs.Save();
+            PlayerPrefs.SetInt("buy2AtkSpdCoin", buy2AtkSpdCoinInt);
+            PlayerPrefs.SetInt("buyAtkSpdCoin", buyAtkSpdCoinInt);
 
-            return coinInt;
+            PlayerPrefs.Save();
+            return buy2AtkSpdCoinInt;  // 2배 증가된 값을 리턴 
+        }
+
+        // 2원 이상 일 경우, 2배로 계산
+        else if (coinInt >= buyAtkSpdCoinInt && buy2AtkSpdCoinInt > 2) {
+            coinInt -= buyAtkSpdCoinInt;
+
+            buy2AtkSpdCoinInt *= 2;
+            buyAtkSpdCoinInt = buy2AtkSpdCoinInt;
+            buyAtkSpdCoinText.text = buyAtkSpdCoinInt.ToString() + " 원";
+
+            PlayerPrefs.SetInt("Coin", coinInt);
+            PlayerPrefs.SetInt("buy2AtkSpdCoin", buy2AtkSpdCoinInt);
+            PlayerPrefs.SetInt("buyAtkSpdCoin", buyAtkSpdCoinInt);
+
+            PlayerPrefs.Save();
+            return buyAtkSpdCoinInt;
         }
 
         // 필요코인 부족할 때,
-        else if (coinInt < buyAtkSpdCoinInt) {
-            buyAtkSpdBtn.interactable = !targetActive;    // false
-            return coinInt;
-        }
-
-        else {  // 필요코인 충분할 때(재구매 가능)
-            buyAtkSpdBtn.interactable = targetActive;     // true
-            return coinInt;
+        else {
+            return 0;
         }
     }
 
     // 치명타 스탯 구매 시, 잃는코인 함수
     public static int LostCriticalCoin(int buyCriticalCoinInt) {
         PlayerPrefs.GetInt("Coin", coinInt);
-        if (coinInt >= buyCriticalCoinInt) {
+        if (coinInt >= buyCriticalCoinInt && buy2CriticalCoinInt == 2) {
             coinInt -= buyCriticalCoinInt;
 
-            Debug.Log("돈 잃었다..");
-
-            PlayerPrefs.SetInt("buyCriticalCoin", buyCriticalCoinInt);
+            buyCriticalCoinInt *= 2;
+            buy2CriticalCoinInt = buyCriticalCoinInt;
+            buyCriticalCoinText.text = buy2CriticalCoinInt.ToString() + " 원";
 
             PlayerPrefs.SetInt("Coin", coinInt);
-            PlayerPrefs.Save();
+            PlayerPrefs.SetInt("buy2CriticalCoin", buy2CriticalCoinInt);
+            PlayerPrefs.SetInt("buyCriticalCoin", buyCriticalCoinInt);
 
-            return coinInt;
+            PlayerPrefs.Save();
+            return buy2CriticalCoinInt;
+        }
+
+        // 2원 이상 일 경우, 2배로 계산
+        else if (coinInt >= buyCriticalCoinInt && buy2CriticalCoinInt > 2) {
+            coinInt -= buyCriticalCoinInt;
+
+            buy2CriticalCoinInt *= 2;
+            buyCriticalCoinInt = buy2CriticalCoinInt;
+            buyCriticalCoinText.text = buyCriticalCoinInt.ToString() + " 원";
+
+            PlayerPrefs.SetInt("Coin", coinInt);
+            PlayerPrefs.SetInt("buy2CriticalCoin", buy2CriticalCoinInt);
+            PlayerPrefs.SetInt("buyCriticalCoin", buyCriticalCoinInt);
+
+            PlayerPrefs.Save();
+            return buyCriticalCoinInt;
         }
 
         // 필요코인 부족할 때,
-        else if (coinInt < buyCriticalCoinInt) {
-            buyCriticalBtn.interactable = !targetActive;    // false
-            return coinInt;
-        }
-
-        else {  // 필요코인 충분할 때(재구매 가능)
-            buyCriticalBtn.interactable = targetActive;     // true
-            return coinInt;
+        else {
+            return 0;
         }
     }
 
