@@ -24,11 +24,11 @@ public class StatManager : MonoBehaviour
     // public static TMP_Text buyCoinText;
     // public static TMP_Text buyGemText;
 
-    // 캐릭터 기본 스탯
-    private float playerAtk = 0.05f;
-    private float playerHealth = 0.05f;
-    private float playerAtkSpeed = 0.05f;
-    private float playerCritical = 0f;
+    // 캐릭터 기본 스탯 (인게임씬 infoStatManager에서 쓰여야 하기 때문에 private > public 으로 바꿈)
+    public static float playerAtk = 0.05f;
+    public static float playerHealth = 0.05f;
+    public static float playerAtkSpeed = 0.05f;
+    public static float playerCritical = 0f;
 
     void Start() {
         // 공격력
@@ -58,6 +58,12 @@ public class StatManager : MonoBehaviour
         if (buyCriticalCoinText == null) {
             Debug.Log("buyCriticalCoinText not found !");
         }
+
+        // 플레이어 기본 스탯 저장된 값 불러오고, 값이 없으면 우측에 표시된 값으로 불러옴
+        PlayerPrefs.GetFloat("ATK", 0.05f);
+        PlayerPrefs.GetFloat("Health", 0.05f);
+        PlayerPrefs.GetFloat("AtkSpd", 0.05f);
+        PlayerPrefs.GetFloat("Critical", 0.0f);
 
         /********************************************** Start() Text 경로 End *************************************************************************/
         
@@ -195,7 +201,7 @@ public class StatManager : MonoBehaviour
             }
 
             else if (PlayerPrefs.GetInt("buyCriticalCoin", buyCriticalCoinInt) >= 4) {
-                int returnedValue_2 = GoodsManager.LostAtkSpdCoin(GoodsManager.buy2CriticalCoinInt);
+                int returnedValue_2 = GoodsManager.LostCriticalCoin(GoodsManager.buy2CriticalCoinInt);
                 if (returnedValue_2 > 0) {
                     playerCritical += 0.5f;
                     PlayerPrefs.SetFloat("Critical", playerCritical);

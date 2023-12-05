@@ -3031,7 +3031,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba79e8917afecd9448356faf8c630a69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 25836738}
 --- !u!1 &509114496
 GameObject:
   m_ObjectHideFlags: 0
@@ -3418,7 +3417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
+  m_Color: {r: 0.30588236, g: 0.30588236, b: 0.30588236, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8056,7 +8055,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC2A4\uD0EF"
+  m_text: "\uC2A4\uD0EF\uC0C1\uC810"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 25608b485c6aaf74ab5f216c4b818afd, type: 2}
   m_sharedMaterial: {fileID: 8742297002007469385, guid: 25608b485c6aaf74ab5f216c4b818afd, type: 2}
@@ -9666,7 +9665,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba79e8917afecd9448356faf8c630a69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 1313712199}
 --- !u!1 &1844677304
 GameObject:
   m_ObjectHideFlags: 0

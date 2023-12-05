@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class GoogleAdMob : MonoBehaviour
 {
-    public GoodsManager gm;
+    public static GoodsManager gm;
+    public static PixGoodsScripts pg;
     public static int rewardCoin;
     public static int rewardGem;
 
@@ -25,6 +26,7 @@ public class GoogleAdMob : MonoBehaviour
         // 'gm' 변수에 'gm' 스크립트의 인스턴스를 할당
         // gm = FindObjectOfType<YourGMScriptType>();
         gm = FindObjectOfType<GoodsManager>();
+        pg = FindObjectOfType<PixGoodsScripts>();
 
         // GoodsManager gm = GameObject.Find("GoodsCanvas").transform.Find("GoodsPanel").transform.Find("CoinRawImage")
         // .GetComponentInChildren<GoodsManager>();
@@ -50,8 +52,6 @@ public class GoogleAdMob : MonoBehaviour
             rewardedAd.Destroy();
             rewardedAd = null;
         }
-
-        Debug.Log("Loading the rewarded ad.");
 
         // create our request used to load the ad.
         var adRequest = new AdRequest();
@@ -85,8 +85,6 @@ public class GoogleAdMob : MonoBehaviour
             rewardedAd.Destroy();
             rewardedAd = null;
         }
-
-        Debug.Log("Loading the rewarded ad.");
 
         // create our request used to load the ad.
         var adRequest = new AdRequest();
@@ -126,7 +124,7 @@ public class GoogleAdMob : MonoBehaviour
                 // 보상의 양을 int로 변환
                 int rewardCoin = (int)reward.Amount;
 
-                // 보상을 코인에 추가 
+                // 메인게임씬 광고보상을 코인에 추가 
                 if (gm != null) {
                     double newCoinAmount = gm.GetCoin(rewardCoin);
                     
@@ -134,8 +132,14 @@ public class GoogleAdMob : MonoBehaviour
                     PlayerPrefs.SetInt("Coin", (int)newCoinAmount);
                     PlayerPrefs.Save();
 
-                } else {
-                    Debug.Log("gm is not found");
+                }
+
+                // 인게임씬 광고보상을 코인에 추가
+                if (pg != null) {
+                    double newCoinAmount2 = pg.GetCoin(rewardCoin);
+
+                    PlayerPrefs.SetInt("Coin", (int)newCoinAmount2);
+                    PlayerPrefs.Save();
                 }
 
                 Debug.Log(string.Format(rewardMsg, reward.Type, reward.Amount));
@@ -159,7 +163,7 @@ public class GoogleAdMob : MonoBehaviour
                 int rewardCoin = (int)reward.Amount;
                 int rewardGem = (int)reward.Amount;
 
-                // 보상을 코인에 추가 
+                // 메인게임씬 광고보상을 코인에 추가
                 if (gm != null) {
                     double newGemAmount = gm.GetGem(rewardGem);
 
@@ -168,8 +172,15 @@ public class GoogleAdMob : MonoBehaviour
                     PlayerPrefs.Save();
 
                 }
-                else {
-                    Debug.Log("gm is not found");
+
+                // 인게임씬 광고보상을 보석에 추가 
+                if (pg != null) {
+                    double newGemAmount2 = pg.GetGem(rewardGem);
+
+                    // 보석을 PlayerPrefs에 저장
+                    PlayerPrefs.SetInt("Gem", (int)newGemAmount2);
+                    PlayerPrefs.Save();
+
                 }
 
                 Debug.Log(string.Format(rewardMsg, reward.Type, reward.Amount));

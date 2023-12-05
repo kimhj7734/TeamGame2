@@ -77,7 +77,7 @@ public class GoodsManager : MonoBehaviour
         gemText = GameObject.Find("GoodsCanvas").transform.Find("GoodsPanel").transform.Find("GemRawImage").GetComponentInChildren<TMP_Text>();
         if (gemText == null) {
             Debug.Log("gemText not found !");
-        }
+        }        
 
         /*
             freeCoinText 는 BtnCanvas/ShopBtn/ShopCanvas/ShopIMG 에 있는 자식 컴포넌트인 freeCoinText 입니다.
@@ -201,7 +201,7 @@ public class GoodsManager : MonoBehaviour
             필요코인 표시
         */
         coinText.text = coinInt.ToString();
-        gemText.text = gemInt.ToString();
+        gemText.text = gemInt.ToString();        
 
         freeCoinText.text = "무료코인 : " + countCoin + " / 5";
         freeGemText.text = "무료보석 : " + countGem + " / 5";
@@ -279,7 +279,7 @@ public class GoodsManager : MonoBehaviour
         if (countGem < 5) {
             countGem++;
             gemInt += freeGem;
-            PlayerPrefs.SetInt("Coin", coinInt);
+            PlayerPrefs.SetInt("Gem", gemInt);
             PlayerPrefs.Save();
         }
 
