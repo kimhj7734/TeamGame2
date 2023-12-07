@@ -34,16 +34,27 @@ public class BtnCommon : MonoBehaviour
 
         /* 각 버튼별 부모 하위 객체(자식)의 버튼 컴포넌트 경로, 버튼 컴포넌트들을 배열로 담음 */
         /* OptionBtn > closeBtn , OptionImg > confirmBtn */
+        // optionCloseBtn = GameObject.Find("EtcUICanvas").transform.Find("EtcPanel")
+        //             .transform.Find("OptionBtn").transform.Find("OptionPanel").GetComponentsInChildren<Button>();
+        
         optionCloseBtn = GameObject.Find("EtcUICanvas").transform.Find("EtcPanel")
-                    .transform.Find("OptionBtn").transform.Find("OptionPanel").GetComponentsInChildren<Button>();
+                    .transform.Find("OptCanvas").transform.Find("OptionBtn").transform.Find("OptionPanel").GetComponentsInChildren<Button>();
+
 
         /* CheckBtn > closeBtn , CheckIMG > confirmBtn */
+        // checkCloseBtn = GameObject.Find("EtcUICanvas").transform.Find("EtcPanel")
+        //             .transform.Find("CheckBtn").transform.Find("CheckPanel").GetComponentsInChildren<Button>();
+
         checkCloseBtn = GameObject.Find("EtcUICanvas").transform.Find("EtcPanel")
-                    .transform.Find("CheckBtn").transform.Find("CheckPanel").GetComponentsInChildren<Button>();
+                    .transform.Find("ChkCanvas").transform.Find("CheckBtn").transform.Find("CheckPanel").GetComponentsInChildren<Button>();
+
 
         /* MissionBtn > closeBtn , MissionIMG > confirmBtn */
+        // missionCloseBtn = GameObject.Find("EtcUICanvas").transform.Find("EtcPanel")
+        //             .transform.Find("MissionBtn").transform.Find("MissionPanel").GetComponentsInChildren<Button>();
+
         missionCloseBtn = GameObject.Find("EtcUICanvas").transform.Find("EtcPanel")
-                    .transform.Find("MissionBtn").transform.Find("MissionPanel").GetComponentsInChildren<Button>();
+                    .transform.Find("MissionCanvas").transform.Find("MissionBtn").transform.Find("MissionPanel").GetComponentsInChildren<Button>();                    
 
         /*
             btnTarget[] = 0 : OptionBtn , 1 : CheckBtn , 2 : MissonBtn
