@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
+using TMPro;
 
 public class BtnCommon : MonoBehaviour
 {
@@ -19,6 +21,11 @@ public class BtnCommon : MonoBehaviour
 
     // 출석체크별(chkCanvas > CheckIMG > BtnCanvasList) 1~31일까지 있어야 하므로, 31개 필요.
     private Button[] chkBtnTarget = new Button[31];
+
+    // 일일미션 보상(claimBtn, rollBtn)버튼 인덱스 (2개씩 총 6개)
+    private Button[] misBtnTarget1 = new Button[2];
+    private Button[] misBtnTarget2 = new Button[2];
+    private Button[] misBtnTarget3 = new Button[2];
 
     /* 각 버튼별 빈곳클릭 or 확인버튼 인덱스를 담을 배열 */
     private Button[] optionCloseBtn;
@@ -42,9 +49,8 @@ public class BtnCommon : MonoBehaviour
     private Dictionary<int, DateTime> buttonDates = new Dictionary<int, DateTime>();
 
     // 현재날짜를 문자열로 표기함.
-    private String nowDate = DateTime.Now.ToString("yyyy-MM-dd");
-
-
+    private String nowDate = DateTime.Now.ToString("yyyy-MM-dd");    
+    
     private bool btnActive = true;
 
     public float clickDelay = 0.5f; // 클릭 딜레이 시간
@@ -91,7 +97,72 @@ public class BtnCommon : MonoBehaviour
                 chkBtnTarget[activeButtonIndex].onClick.AddListener(() => popupExitBtnClick(activeButtonIndex));
             }
         }
+
         /*********************************************************** 출석체크 버튼 배열 ****************************************************/
+
+        /***************************************************** 일일미션 버튼 배열 **********************************************************/
+        /*
+            각 미션 보상버튼 총 3개의 미션 보상버튼
+            각 canvas당 2개의 버튼(claimBtn, reRollBtn)
+            [0] : claimBtn
+            [1] : reRollBtn
+        */
+        misBtnTarget1 = GameObject.Find("EtcUICanvas").transform.Find("EtcPanel").transform.Find("MissionCanvas").transform.Find("MissionBtn")
+        .transform.Find("MissionPanel").transform.Find("MissionIMG").transform.Find("MissionCanvasList").transform.Find("MisCanvas1")
+        .GetComponentsInChildren<Button>();
+        if (misBtnTarget1 != null) {            
+            int activeButtonIndex = GetActiveButtonIndex();
+            // 조건문에 해당되는 인덱스(버튼)만 활성화, 날짜비교 메서드
+            if (activeButtonIndex >= 0 && activeButtonIndex < misBtnTarget1.Length) {
+                misBtnTarget1[activeButtonIndex].interactable = true;
+                // 기존에 등록된 이벤트 핸들러 제거 (다중호출방지)
+                misBtnTarget1[activeButtonIndex].onClick.RemoveAllListeners();
+                // 새로운 이벤트 핸들러 등록
+                misBtnTarget1[activeButtonIndex].onClick.AddListener(() => popupExitBtnClick(activeButtonIndex));
+            }
+        }
+
+        misBtnTarget2 = GameObject.Find("EtcUICanvas").transform.Find("EtcPanel").transform.Find("MissionCanvas").transform.Find("MissionBtn")
+        .transform.Find("MissionPanel").transform.Find("MissionIMG").transform.Find("MissionCanvasList").transform.Find("MisCanvas2")
+        .GetComponentsInChildren<Button>();
+        if (misBtnTarget2 != null) {
+            int activeButtonIndex = GetActiveButtonIndex();
+            // 조건문에 해당되는 인덱스(버튼)만 활성화, 날짜비교 메서드
+            if (activeButtonIndex >= 0 && activeButtonIndex < misBtnTarget2.Length) {
+                misBtnTarget2[activeButtonIndex].interactable = true;
+                // 기존에 등록된 이벤트 핸들러 제거 (다중호출방지)
+                misBtnTarget2[activeButtonIndex].onClick.RemoveAllListeners();
+                // 새로운 이벤트 핸들러 등록
+                misBtnTarget2[activeButtonIndex].onClick.AddListener(() => popupExitBtnClick(activeButtonIndex));
+            }
+        }
+
+        misBtnTarget3 = GameObject.Find("EtcUICanvas").transform.Find("EtcPanel").transform.Find("MissionCanvas").transform.Find("MissionBtn")
+        .transform.Find("MissionPanel").transform.Find("MissionIMG").transform.Find("MissionCanvasList").transform.Find("MisCanvas3")
+        .GetComponentsInChildren<Button>();
+        if (misBtnTarget3 != null) {
+            int activeButtonIndex = GetActiveButtonIndex();
+            // 조건문에 해당되는 인덱스(버튼)만 활성화, 날짜비교 메서드
+            if (activeButtonIndex >= 0 && activeButtonIndex < misBtnTarget3.Length) {
+                misBtnTarget3[activeButtonIndex].interactable = true;
+                // 기존에 등록된 이벤트 핸들러 제거 (다중호출방지)
+                misBtnTarget3[activeButtonIndex].onClick.RemoveAllListeners();
+                // 새로운 이벤트 핸들러 등록
+                misBtnTarget3[activeButtonIndex].onClick.AddListener(() => popupExitBtnClick(activeButtonIndex));
+            }
+        }
+
+        /*
+            Dynamic Text
+        */
+        // awardText = GameObject.Find("EtcUICanvas").transform.Find("EtcPanel").transform.Find("MissionCanvas").transform.Find("MissionBtn")
+        // .transform.Find("MissionPanel").transform.Find("MissionIMG").transform.Find("MissionCanvasList").transform.Find("MisCanvas1")
+        // .transform.Find("MisPanel1").transform.Find("fixAwardText1").GetComponentsInChildren<TMP_Text>();
+        // if(awardText != null) {
+            
+        // }
+
+        /***************************************************** 일일미션 버튼 배열 **********************************************************/
 
         /* 각 버튼별 부모 하위 객체(자식)의 버튼 컴포넌트 경로, 버튼 컴포넌트들을 배열로 담음 */
         /* OptionBtn > closeBtn , OptionImg > confirmBtn */
@@ -246,7 +317,7 @@ public class BtnCommon : MonoBehaviour
 
             }
 
-        /* chkBtnCanvas1 > chkBtn1 > closeBtn , confirmBtn 기능 */
+        /* chkBtnCanvas1 > chkBtn1 > closeBtn , confirmBtn 기능 , 일일체크 기능 */
         for (int a = 0; a < popupCloseBtn.Length; a++) {
             switch (a) {
                 case 0:
@@ -258,6 +329,102 @@ public class BtnCommon : MonoBehaviour
 
                     // 기존에 등록된 이벤트 핸들러 제거 (다중호출방지)
                     popupCloseBtn[a].onClick.RemoveAllListeners();
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
+
+        /* misBtnCanvas1 > missionBtn > claimBtn[0] , reRollBtn[1] 일일미션 기능 */
+        for (int a = 0; a < misBtnTarget1.Length; a++) {
+            switch (a) {
+                case 0:
+                    /*
+                        missionBtn > claimBtn (보상버튼) 동작
+                    */
+                    int btnIndex0 = a;
+                    misBtnTarget1[a].onClick.AddListener(() => missionExitBtnClick(btnIndex0));
+
+                    // 기존에 등록된 이벤트 핸들러 제거 (다중호출방지)
+                    misBtnTarget1[a].onClick.RemoveAllListeners();
+                    break;
+
+                case 1:
+                    /*
+                        missionBtn > reRollBtn (새로고침버튼) 동작
+                    */
+                    int btnIndex1 = a;
+                    misBtnTarget2[a].onClick.AddListener(() => missionExitBtnClick(btnIndex1));
+                    //misBtnTarget1[a].onClick.AddListener(() => RandomMissionActive(btnIndex1));
+
+                    // 기존에 등록된 이벤트 핸들러 제거 (다중호출방지)
+                    misBtnTarget1[a].onClick.RemoveAllListeners();
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
+
+        /* misBtnCanvas2 > missionBtn > claimBtn[0] , reRollBtn[1] 기능 */
+        for (int a = 0; a < misBtnTarget2.Length; a++) {
+            switch (a) {
+                case 0:
+                    /*
+                        missionBtn > claimBtn 동작
+                    */
+                    int btnIndex0 = a;
+                    misBtnTarget2[a].onClick.AddListener(() => missionExitBtnClick(btnIndex0));
+
+                    // 기존에 등록된 이벤트 핸들러 제거 (다중호출방지)
+                    misBtnTarget2[a].onClick.RemoveAllListeners();
+                    break;
+
+                case 1:
+                    /*
+                        missionBtn > reRollBtn 동작
+                    */
+                    int btnIndex1 = a;
+                    misBtnTarget2[a].onClick.AddListener(() => missionExitBtnClick(btnIndex1));
+                    // misBtnTarget2[a].onClick.AddListener(() => RandomMissionActive(btnIndex1));
+
+                    // 기존에 등록된 이벤트 핸들러 제거 (다중호출방지)
+                    misBtnTarget2[a].onClick.RemoveAllListeners();
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
+
+        /* misBtnCanvas3 > missionBtn > claimBtn[0] , reRollBtn[1] 기능 */
+        for (int a = 0; a < misBtnTarget3.Length; a++) {
+            switch (a) {
+                case 0:
+                    /*
+                        missionBtn > claimBtn 동작
+                    */
+                    int btnIndex0 = a;
+                    misBtnTarget3[a].onClick.AddListener(() => missionExitBtnClick(btnIndex0));
+
+                    // 기존에 등록된 이벤트 핸들러 제거 (다중호출방지)
+                    misBtnTarget3[a].onClick.RemoveAllListeners();
+                    break;
+
+                case 1:
+                    /*
+                        missionBtn > reRollBtn 동작
+                    */
+                    int btnIndex1 = a;
+                    misBtnTarget3[a].onClick.AddListener(() => missionExitBtnClick(btnIndex1));
+                    // misBtnTarget3[a].onClick.AddListener(() => RandomMissionActive(btnIndex1));
+
+                    // 기존에 등록된 이벤트 핸들러 제거 (다중호출방지)
+                    misBtnTarget3[a].onClick.RemoveAllListeners();
                     break;
 
                 default:
@@ -393,6 +560,20 @@ public class BtnCommon : MonoBehaviour
 
     /* closeBtn, confirmBtn End */
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /*************************************************** 랜덤미션 함수 *******************************************************************/
+    // private int RandomMissionActive(int btnIndex) {
+    //     for(int i = 0; i < awardText.Length; i++) {
+    //         if(btnIndex == i) { // [1] : reRollBtn
+    //             // 일일미션 새로고침 변수 (0 ~ 9까지)
+    //             int randomRoll = Random.Range(0, 9);
+    //             int a = randomRoll;
+    //             int[] temp = new int[a];
+
+    //         }
+    //     }
+    //     return 0;
+    // }
 
     // 메뉴 버튼 클릭 딜레이 설정
     void Update() {
